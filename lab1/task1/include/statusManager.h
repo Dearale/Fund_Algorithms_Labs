@@ -1,0 +1,18 @@
+#ifndef STATUS_MANAGER_H
+#define STATUS_MANAGER_H
+
+typedef enum {
+    OK,
+    WRONG_NUMBER_OF_ARGUMENTS,
+    UNALLOWED_NUMBER,
+    INCORRECT_FLAG_FORMAT,
+    NUMBER_OUT_OF_BOUNDS,
+    DIVISION_BY_ZERO,
+    OUT_OF_BOUNDS_FOR_DEGREE_TABLE,
+    OUT_OF_BOUNDS_FOR_SUM_UP_TO_X,
+    OUT_OF_BOUNDS_FOR_FACTORIAL
+} Status;
+
+void printStatus(Status status);
+
+#endif

@@ -1,0 +1,20 @@
+#ifndef STATUS_MANAGER_H
+#define STATUS_MANAGER_H
+
+typedef enum {
+    OK,
+    MEMORY_ERROR,
+    CANT_OPEN_INPUT_FILE,
+    CANT_CREATE_OUTPUT_FILE,
+    CANT_CONVERT_TO_NUMBER,
+    NOT_A_NUMBER,
+    WRONG_NUMBER_OF_ARGUMENTS,
+    NO_ZEROS_FOR_MULTIPLES,
+    INCORRECT_FLAG_FORMAT,
+    INCORRECT_EPSILON,
+    NUMBER_OUT_OF_BOUNDS
+} Status;
+
+void printStatus(Status status);
+
+#endif
