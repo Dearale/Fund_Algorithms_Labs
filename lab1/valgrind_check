@@ -1,0 +1,8 @@
+# Проверка утечек памяти
+valgrind --leak-check=full ./main.out 10 -a
+
+# Упрощенная проверка
+valgrind ./main.out 5 -h
+
+# Детальная проверка с отслеживанием всех ошибок
+valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes ./main.out 7 -p

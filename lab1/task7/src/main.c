@@ -7,7 +7,7 @@
 
 void printUsage() {
     printf("Использование: <имя программы> <путь к входному файлу> <путь к выходному файлу>.\n");
-    printf("Пример: \"./task5 input.txt output.txt\"\n");
+    printf("Пример: \"./main.out input.txt output.txt\"\n");
 }
 
 

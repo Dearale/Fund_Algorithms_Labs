@@ -7,7 +7,7 @@
 
 void printUsage() {
     printf("Использование: <имя программы> <флаг> <путь к входному файлу> <путь к выходному файлу, если указан символ n>.\n");
-    printf("Пример: \"./task5 -nd input.txt output.txt\"\n");
+    printf("Пример: \"./main.out -nd input.txt output.txt\"\n");
 }
 
 
@@ -25,6 +25,9 @@ int main(int argc, char * argv[]) {
 
     fin = fopen(inputFile, "r");
     if (fin == NULL) {
+        if (flag[1] != 'n') {
+            free(outputFile);
+        }
         printStatus(CANT_OPEN_INPUT_FILE);
         return 1;
     }
