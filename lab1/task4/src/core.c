@@ -2,6 +2,23 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
+
+#define MAX_NUM_FOR_FACTORIAL 20
+
+double calcByEq(double eps, double l, double r, double (*f)(double)) {
+    double mid = 0;
+    while (fabs(r - l) >= eps) {
+        mid = (l + r) / 2.0;
+        if (f(mid) > 0) {
+            r = mid;
+        }
+        else {
+            l = mid;
+        }
+    }
+    return (l + r) / 2;
+}
 
 double eByLim(double eps) {
     double prev = 0;
@@ -29,8 +46,13 @@ double eBySeries(double eps) {
     return cur;
 }
 
-double eByEq() {
-    return exp(1);
+
+double funcForEByEq(double x) {
+    return log(x) - 1;
+}
+
+double eByEq(double eps) {
+    return calcByEq(eps, 2, 3, funcForEByEq);
 }
 
 double piByLim(double eps) {
@@ -58,8 +80,12 @@ double piBySeries(double eps) {
     return cur;
 }
 
-double piByEq() {
-    return acos(-1);
+double funcForPiByEq(double x) {
+    return cos(x);
+}
+
+double piByEq(double eps) {
+    return calcByEq(eps, -2, 0, funcForPiByEq) * (-2);
 }
 
 double ln2ByLim(double eps) {
@@ -86,8 +112,12 @@ double ln2BySeries(double eps) {
     return cur;
 }
 
-double ln2ByEq() {
-    return log(2);
+double funcForLn2ByEq(double x) {
+    return exp(x) - 2;
+}
+
+double ln2ByEq(double eps) {
+    return calcByEq(eps, 0, 1, funcForLn2ByEq);
 }
 
 double sqrt2ByLim(double eps) {
@@ -112,8 +142,12 @@ double sqrt2BySeries(double eps) {
     return cur;
 }
 
-double sqrt2ByEq() {
-    return sqrt(2);
+double funcForSqrt2ByEq(double x) {
+    return x * x - 2;
+}
+
+double sqrt2ByEq(double eps) {
+    return calcByEq(eps, 1, 2, funcForSqrt2ByEq);
 }
 
 long long factorial(long long n) {
@@ -143,6 +177,8 @@ double gammaByLim(double eps) {
     long long m = 1;
     do {
         m++;
+        if (m > MAX_NUM_FOR_FACTORIAL)
+            break;
         prev = cur;
         cur = 0;
         for (long long k = 1; k <= m; k++)
@@ -153,7 +189,7 @@ double gammaByLim(double eps) {
             } else {
                 coef = multiplyFromTo(m - k + 1, m) / factorial(k);
             }
-            cur += coef * powl(-1, k) * logl(factorial(k)) / k;
+            cur += coef * powl(-1.0, k) * logl(factorial(k)) / k;
         }
     } while (fabs(cur - prev) >= eps);
     return cur;
@@ -171,43 +207,64 @@ double gammaBySeries(double eps) {
         long long sqrtK = (long long)sqrt(k);
         cur += (1.0 / (sqrtK * sqrtK) - 1.0 / k);
     } while (fabs(cur - prev) >= eps || fabs(prev - prev_prev) >= eps);
-    double finalAddition = -pow(piByEq(), 2) / 6;
+    double pi = acos(-1);
+    double finalAddition = -pow(pi, 2) / 6;
     return finalAddition + cur;
 }
 
-bool getNextPrimeLessThanTIfExists(long long t, long long *curPrime) {
-    for (long long i = *curPrime + 1; i <= t; i++) {
-        if (i == 1) {
+int * populatePrimes(int count) {
+    int * numbers = malloc(sizeof(int) * count);
+
+    for (int i = 0; i < count; ++i) {
+        numbers[i] = 0;
+    }
+
+    for (int i = 2; i < count; ++i) {
+        if (numbers[i]) {
             continue;
         }
-        bool isPrime = true;
-        for (long long j = 2; j * j <= i; j++) {
-            if (i % j == 0){
-                isPrime = false;
-                break;
-            }
-        }
-        if (isPrime) {
-            *curPrime = i;
-            return true;
+        for (int j = i + i; j < count; j += i) {
+            numbers[j] = 1;
         }
     }
-    return false;
+
+    return numbers;
+}
+
+double calcGammaForEq(int t, int * primes) {
+    double multiplication = 1;
+    for (int i = 2; i < t; i++)
+    {
+        if (primes[i] == 0) {
+            multiplication *= ((i - 1) / ((double)i));
+        }
+    }
+    return log(t) * multiplication;
 }
 
 double gammaByEq(double eps) {
-    double prev = 0;
-    double cur = 0;
-    long long t = 1;
-    double curMultiplication = 1;
-    long long curPrime = 0;
-    do {
-        t++;
-        prev = cur;
-        if (getNextPrimeLessThanTIfExists(t, &curPrime)) {
-            curMultiplication *= (curPrime - 1) / (double)curPrime;
+    int maxT = 1e6;
+    int * primes = populatePrimes(maxT);
+
+    if (!primes) {
+        return -1;
+    }
+
+    double res = calcGammaForEq(maxT, primes);
+    double l = 0;
+    double r = 1;
+    double mid;
+
+    while (fabs(r - l) >= eps) {
+        mid = (l + r) / 2;
+        if (exp(-mid) - res > 0) {
+            l = mid;
         }
-        cur = -log(log(t) * curMultiplication);
-    } while (fabs(cur - prev) >= eps);
-    return cur;
+        else {
+            r = mid;
+        }
+    }
+
+    free(primes);
+    return (l + r) / 2.0;
 }

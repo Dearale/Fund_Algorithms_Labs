@@ -33,37 +33,37 @@ make
 
 ## Тест 1
 ```
-./main.out testFiles/input.txt -d
+./main.out -d testFiles/input.txt
 ```
 
 ```
-./main.out testFiles/input.txt -nd testFiles/output.txt
+./main.out -nd testFiles/input.txt testFiles/output.txt
 ```
 
 ## Тест 2
 ```
-./main.out testFiles/input.txt -i
+./main.out -i testFiles/input.txt
 ```
 
 ```
-./main.out testFiles/input.txt -ni testFiles/output.txt
+./main.out -ni testFiles/input.txt testFiles/output.txt
 ```
 
 ## Тест 3
 ```
-./main.out testFiles/input.txt -s
+./main.out -s testFiles/input.txt
 ```
 
 ```
-./main.out testFiles/input.txt -ns testFiles/output.txt
+./main.out -ns testFiles/input.txt testFiles/output.txt
 ```
 
 
 ## Тест 4
 ```
-./main.out testFiles/input.txt -a
+./main.out -a testFiles/input.txt
 ```
 
 ```
-./main.out testFiles/input.txt -na testFiles/output.txt
+./main.out -na testFiles/input.txt testFiles/output.txt
 ```

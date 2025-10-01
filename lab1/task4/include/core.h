@@ -6,21 +6,21 @@
 double eByLim(double eps);
 double eBySeries(double eps);
 
-double eByEq();
+double eByEq(double eps);
 double piByLim(double eps);
 double piBySeries(double eps);
-double piByEq();
+double piByEq(double eps);
 
 double ln2ByLim(double eps);
 
 double ln2BySeries(double eps);
-double ln2ByEq();
+double ln2ByEq(double eps);
 
 double sqrt2ByLim(double eps);
 
 double sqrt2BySeries(double eps);
 
-double sqrt2ByEq();
+double sqrt2ByEq(double eps);
 long long factorial(long long n);
 
 

@@ -43,7 +43,7 @@ int main() {
     {
         int idx;
         scanf("%d", &idx);
-        if (idx > MAX_IDX) {
+        if (idx > MAX_IDX || idx <= 0) {
             printf("Максимальный индекс не должен превышать %d.\n", MAX_IDX);
             return 1;
         }
