@@ -212,9 +212,7 @@ double gammaBySeries(double eps) {
     return finalAddition + cur;
 }
 
-int * populatePrimes(int count) {
-    int * numbers = malloc(sizeof(int) * count);
-
+int * populatePrimes(int count, int * numbers) {
     for (int i = 0; i < count; ++i) {
         numbers[i] = 0;
     }
@@ -244,11 +242,12 @@ double calcGammaForEq(int t, int * primes) {
 
 double gammaByEq(double eps) {
     int maxT = 1e6;
-    int * primes = populatePrimes(maxT);
-
+    int * primes = malloc(sizeof(int) * maxT);
     if (!primes) {
         return -1;
     }
+    
+    populatePrimes(maxT, primes);
 
     double res = calcGammaForEq(maxT, primes);
     double l = 0;
