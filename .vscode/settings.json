@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.ejs": "html",
-        "math.h": "c"
+        "math.h": "c",
+        "error_messages.h": "c"
     }
 }
