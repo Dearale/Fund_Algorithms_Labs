@@ -47,13 +47,12 @@ Status hasFiniteRepresentation(bool * res, int base, double val) {
 }
 
 Status haveFiniteRepresentations(bool ** res, int base, int count, ...) {
-    va_list args;
-    
     *res = (bool *)malloc(count * sizeof(bool));
     if (*res == NULL) {
         return MEMORY_ERROR;
     }
     
+    va_list args;
     va_start(args, count);
     
     double val = 0;

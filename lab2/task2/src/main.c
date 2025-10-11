@@ -6,7 +6,7 @@
 
 #include "../include/core.h"
 
-void printTests()
+void printTestsForSprintf()
 {
     char a[] = "abcdef";
     char b[] = "abcef";
@@ -77,6 +77,6 @@ void printTests()
 
 int main()
 {
-    printTests();
+    printTestsForSprintf();
     return 0;
 }
