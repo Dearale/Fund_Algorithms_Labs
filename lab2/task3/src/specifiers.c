@@ -139,11 +139,12 @@ int handleSpecifier(Specifier spec, va_list args, char * out) {
 }
 
 int handleStandardSpecifier(const char **format, va_list args, char * out) {
-    char fmtbuf[64];
+    const int fmtbuflen = 64;
+    char fmtbuf[fmtbuflen + 1];
     char *bufp = fmtbuf;
     *bufp++ = '%';
     
-    while (**format != '\0' && strchr(specifiers, **format) == NULL)
+    while ((bufp - fmtbuf < fmtbuflen - 1) && **format != '\0' && strchr(specifiers, **format) == NULL)
     {
         *bufp++ = **format;
         (*format)++;

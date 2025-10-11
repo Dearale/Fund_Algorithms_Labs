@@ -382,5 +382,9 @@ int main()
 {
     printTestsForSprintf();
     printTestsForFprintf();
+
+    int x = 5;
+    scanf("la la la %d", &x);
+    printf("x: %d\n", x);
     return 0;
 }
