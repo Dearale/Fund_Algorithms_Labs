@@ -5,6 +5,9 @@
         "error_messages.h": "c",
         "compare": "c",
         "type_traits": "c",
-        "functions.h": "c"
+        "functions.h": "c",
+        "typeinfo": "c",
+        "studentcompare.h": "c",
+        "student.h": "c"
     }
 }
