@@ -4,6 +4,7 @@
         "math.h": "c",
         "error_messages.h": "c",
         "compare": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "functions.h": "c"
     }
 }

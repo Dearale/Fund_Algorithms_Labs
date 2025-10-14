@@ -18,8 +18,8 @@ void printRes(bool * res, int count) {
 
 int main() {
     bool * res = NULL;
-    int count = 4;
-    Status status = haveFiniteRepresentations(&res, 2, count, 0.25, 0.2, 0.3, 0.4);
+    int count = 5;
+    Status status = haveFiniteRepresentations(&res, 3, count, 0.25, 0.2, 0.3, 0.4, 0.3333333333333333333333333333333333333333333333333333333333333333);
     if (status == OK) {
         printRes(res, count);
     }
