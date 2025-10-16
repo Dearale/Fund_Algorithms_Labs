@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "../include/core.h"
+#include "../include/demonstration.h"
 
 // Демонстрация использования oversscanf / overfscanf.
 // Печатаем входные данные, формат и то, что прочитали.
@@ -27,6 +28,9 @@ static void print_ok_count(const char *label, int ok_count) {
 }
 
 int main(void) {
+    demonstrate();
+    return 0;
+
     // ---------- 1) oversscanf: стандартные спецификаторы ----------
     hr("1) oversscanf: базовая проверка стандартных спецификаторов");
     {

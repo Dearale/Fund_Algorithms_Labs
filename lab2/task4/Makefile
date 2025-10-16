@@ -4,7 +4,7 @@ LDFLAGS = -lm
 SRC_DIR = src
 OBJ_DIR = obj
 
-SOURCES = $(SRC_DIR)/core.c $(SRC_DIR)/main.c $(SRC_DIR)/functions.c $(SRC_DIR)/specifiers.c
+SOURCES = $(SRC_DIR)/core.c $(SRC_DIR)/main.c $(SRC_DIR)/functions.c $(SRC_DIR)/specifiers.c $(SRC_DIR)/demonstration.c
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 TARGET = main.out
 

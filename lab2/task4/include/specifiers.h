@@ -17,15 +17,15 @@ Specifier getSpecifierType(const char * formatPointer);
 int getSpecifierLength(Specifier spec);
 int getNumOfReadArguments(Specifier spec);
 
-int handleRimSpecifier(va_list args, char * out);
+int handleRimSpecifier(va_list args, const char * input);
 
-int handleZeckendorfSpecifier(va_list args, char * out);
+int handleZeckendorfSpecifier(va_list args, const char * input);
 
-int handleConvertToBase10Specifiers(Specifier spec, va_list args, char * out);
+int handleConvertToBase10Specifiers(Specifier spec, va_list args, const char * input);
 
-int handleSpecifier(Specifier spec, va_list args, char * out);
+int handleSpecifier(Specifier spec, va_list args, const char * input);
 
-int handleStandardSpecifier(const char **format, va_list args, char * out);
+int handleStandardSpecifier(const char **format, va_list args, const char * input);
 
 
 #endif

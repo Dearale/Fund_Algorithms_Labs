@@ -44,17 +44,17 @@ int getNumOfReadArguments(Specifier spec) {
     }
 }
 
-int handleRimSpecifier(va_list args, char * input) {
+int handleRimSpecifier(va_list args, const char * input) {
     int *num = va_arg(args, int *);
     return convertFromRim(num, input);
 }
 
-int handleZeckendorfSpecifier(va_list args, char * input) {
+int handleZeckendorfSpecifier(va_list args, const char * input) {
     unsigned int *num = va_arg(args, unsigned int *);
     return fromZeckendorf(num, input);
 }
 
-int handleConvertToBase10Specifiers(Specifier spec, va_list args, char * input) {
+int handleConvertToBase10Specifiers(Specifier spec, va_list args, const char * input) {
     int * num = va_arg(args, int *);
     int base = va_arg(args, int);
 
@@ -62,17 +62,17 @@ int handleConvertToBase10Specifiers(Specifier spec, va_list args, char * input) 
     return convertToBase10(input, base, num, isCapital);
 }
 
-int handleSpecifier(Specifier spec, va_list args, char * out) {
+int handleSpecifier(Specifier spec, va_list args, const char * input) {
     switch (spec) {
         case RIM_NUMBER:
-            return handleRimSpecifier(args, out);
+            return handleRimSpecifier(args, input);
 
         case ZECKENDORF:
-            return handleZeckendorfSpecifier(args, out);
+            return handleZeckendorfSpecifier(args, input);
 
         case CONVERT_TO_BASE_10_LOWER:
         case CONVERT_TO_BASE_10_UPPER:
-            return handleConvertToBase10Specifiers(spec, args, out);
+            return handleConvertToBase10Specifiers(spec, args, input);
         
         default:
             return 0;
@@ -82,7 +82,7 @@ int handleSpecifier(Specifier spec, va_list args, char * out) {
     return 0;
 }
 
-int handleStandardSpecifier(const char **format, va_list args, char *strp) {
+int handleStandardSpecifier(const char **format, va_list args, const char *strp) {
     #define HANDLE_TYPE(type) \
         type *out = va_arg(args, type *); \
         *out = (type)val; \
@@ -109,13 +109,13 @@ int handleStandardSpecifier(const char **format, va_list args, char *strp) {
             (*format)++;
         }
     } else if (fmtp[0] == 's') {
-        char *start = strp;
+        const char *start = strp;
         while (*start && isspace((unsigned char)*start)) {
             start++;
         }
 
         char *out = va_arg(args, char *);
-        endptr = start;
+        endptr = (char *)start;
         while (*endptr && !isspace((unsigned char)*endptr)) {
             out[endptr - start] = *endptr;
             endptr++;

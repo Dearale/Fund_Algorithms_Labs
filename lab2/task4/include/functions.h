@@ -19,9 +19,9 @@
 #define MAX_BASE 36
 
 
-int convertFromRim(int *num, char * input);
+int convertFromRim(int *num, const char * input);
 
-int fromZeckendorf(unsigned int *num, char *input);
+int fromZeckendorf(unsigned int *num, const char *input);
 
-int convertToBase10(char *input, int base, int * number, bool isCapital);
+int convertToBase10(const char *input, int base, int * number, bool isCapital);
 #endif

@@ -21,7 +21,7 @@
 
 void convertToRim(int num, char * output);
 
-void generateFibonacci(unsigned int * fib, int *count);
+void generateFibonacciUpToNum(const unsigned int num, unsigned int * fib, int *count);
 
 void printFibonacci(unsigned int *fib, int count);
 void toZeckendorf(unsigned int num, char *out);

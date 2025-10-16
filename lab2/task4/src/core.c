@@ -62,12 +62,12 @@ int overfscanf(FILE * stream, const char *format, ...)
     return assigned;
 }
 
-int oversscanf(char *str, const char *format, ...)
+int oversscanf(const char *str, const char *format, ...)
 {
     va_list args;
     va_start(args, format);
 
-    char * strp = str;
+    const char * strp = str;
     const char * fmtp = format;
     int assigned = 0;
     while (*fmtp != '\0') 

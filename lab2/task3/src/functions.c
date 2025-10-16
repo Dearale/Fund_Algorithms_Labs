@@ -49,22 +49,26 @@ void convertToRim(int num, char * output)
     *ptr = '\0';
 }
 
-void generateFibonacci(unsigned int * fib, int *count)
+void generateFibonacciUpToNum(const unsigned int num, unsigned int * fib, int *count)
 {
     fib[0] = 1;
     fib[1] = 2;
-
     *count = 2;
-    while (true)
+    for (unsigned int i = 0; i <= 2; i++)
     {
-        if (fib[*count - 1] > UINT_MAX - fib[*count - 2])
+        if (num == i)
         {
-            break;
+            *count = i;
+            return;
         }
-        
-        fib[*count] = fib[*count - 1] + fib[*count - 2];
-        (*count)++;
     }
+
+    unsigned int nextVal = fib[0] + fib[1];
+    do {
+        fib[*count] = nextVal;
+        (*count)++;
+        nextVal = fib[*count - 2] + fib[*count - 1];
+    } while (fib[*count - 1] <= UINT_MAX - fib[*count - 2] && nextVal <= num);
 }
 
 void printFibonacci(unsigned int *fib, int count)
@@ -79,7 +83,7 @@ void toZeckendorf(unsigned int num, char *out)
 {
     unsigned int fib[MAX_ZECKENDORF_LEN];
     int count = 0;
-    generateFibonacci(fib, &count);
+    generateFibonacciUpToNum(num, fib, &count);
 
 
     int i = count - 1;

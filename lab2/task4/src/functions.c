@@ -23,10 +23,10 @@ int getIndexFromRimChar(char c) {
     return -1;
 }
 
-int convertFromRim(int * num, char * input)
+int convertFromRim(int * num, const char * input)
 {
     *num = 0;
-    char * ip = input;
+    const char * ip = input;
     int res = 0;
     while (*ip && isspace((unsigned char)*ip)) {
         ip++;
@@ -91,9 +91,9 @@ void printFibonacci(unsigned int *fib, int count)
     }
 }
 
-int fromZeckendorf(unsigned int * num, char *input)
+int fromZeckendorf(unsigned int * num, const char *input)
 {
-    char * ip = input;
+    const char * ip = input;
 
     unsigned int fib[MAX_ZECKENDORF_LEN];
     int count = 0;
@@ -105,7 +105,7 @@ int fromZeckendorf(unsigned int * num, char *input)
         ip++;
     }
 
-    char * start = ip;
+    const char * start = ip;
     while (*ip && !isspace((unsigned char)*ip)) {
         if (*ip == '1' && ip[1] && !isspace((unsigned char)ip[1])) {
             res += fib[ip - start];
@@ -119,7 +119,7 @@ int fromZeckendorf(unsigned int * num, char *input)
     return ip - input;
 }
 
-bool isValidCharForBase(char c, int base, bool isCapital)
+bool isValidCharForBase(const char c, int base, bool isCapital)
 {
     bool isValid = false;
     char startLetter = isCapital ? 'A' : 'a';
@@ -135,13 +135,13 @@ bool isValidCharForBase(char c, int base, bool isCapital)
     return isValid;
 }
 
-int convertToBase10(char *input, int base, int * number, bool isCapital) {
+int convertToBase10(const char *input, int base, int * number, bool isCapital) {
     if (base < MIN_BASE || base > MAX_BASE)
     {
         base = 10;
     }
 
-    char *word = input;
+    const char *word = input;
     while (*word && isspace((unsigned char)*word)) {
         word++;
     }

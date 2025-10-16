@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include <limits.h>
 
-#define MAX_DENOMINATOR 1e15
-#define EPSILON 1e-12
+#define MAX_DENOMINATOR 1e12
+#define EPSILON (1 / MAX_DENOMINATOR)
 
 long long gcd(long long a, long long b) {
     long long tmp = 0;
@@ -22,15 +22,42 @@ long long gcd(long long a, long long b) {
     return a;
 }
 
-long long scaleNumAndDen(double val, long long *den) {
-    *den = 1;
-    while (*den <= MAX_DENOMINATOR / 10 && fabs(val - round(val)) >= EPSILON) {
-        val *= 10;
-        (*den) *= 10;
-    }
-    return llround(val);
-}
+Status calcNumAndDen(const double eps, const double val, long long *num, long long *den) {
+    double fraq = val;
+    long long nPrev = 1, dPrev = 0;
+    long long nPrevPrev = 0, dPrevPrev = 1;
+    long long n, d;
 
+    do {
+        long long b_i = (long long)floor(fraq);
+
+        if (b_i != 0 && (nPrev > LLONG_MAX / b_i || dPrev > LLONG_MAX / b_i))
+            return NUMBER_OUT_OF_BOUNDS;
+
+        n = b_i * nPrev + nPrevPrev;
+        d = b_i * dPrev + dPrevPrev;
+
+        double aprx = (double)n / d;
+        if (fabs(aprx - fraq) < eps)
+            break;
+
+        nPrevPrev = nPrev;
+        dPrevPrev = dPrev;
+        nPrev = n;
+        dPrev = d;
+
+        double fraqPart = fraq - b_i;
+        if (fabs(fraqPart) < eps)
+            break;
+        
+        fraq = 1.0 / fraqPart;
+    } while(true);
+
+    *num = n;
+    *den = d;
+
+    return OK;
+}
 
 Status hasFiniteRepresentation(bool * res, int base, double val) {
     if (base < 2) {
@@ -39,9 +66,13 @@ Status hasFiniteRepresentation(bool * res, int base, double val) {
     if (val <= EPSILON || val >= 1 - EPSILON) {
         return NUMBER_OUT_OF_BOUNDS;
     }
+    long long num = 0;
+    long long den = 0;
+    Status status = calcNumAndDen(EPSILON, val, &num, &den);
+    if (status != OK) {
+        return NUMBER_OUT_OF_BOUNDS;
+    }
 
-    long long den = 1;
-    long long num = scaleNumAndDen(val, &den);
     long long g = gcd(num, den);
     den /= g;
 
