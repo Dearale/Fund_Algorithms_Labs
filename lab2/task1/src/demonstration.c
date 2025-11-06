@@ -30,10 +30,10 @@ void demonstrate() {
 
     // Тест 1: основание 2 (бинарная система)
     printf("[Тест 1] base = 2, числа: 0.25, 0.2, 0.3, 0.5\n");
-    handleTest(haveFiniteRepresentations(&res, 2, 4, 0.25, 0.2, 0.3, 0.5), &res);
+    handleTest(haveFiniteRepresentations(&res, 256, 4, 0.25, 1/255.0, 0.8888888888888888888888888, 0.3), &res);
     // Тест 2: основание 10 (десятичная система)
     printf("[Тест 2] base = 10, числа: 0.125, 0.3333, 0.5\n");
-    handleTest(haveFiniteRepresentations(&res, 10, 3, 0.125, 0.3333, 0.5), &res);
+    handleTest(haveFiniteRepresentations(&res, 10, 3, 0.125, 1.0/3, 0.5), &res);
 
     // Тест 3: основание 8 (восьмеричная система)
     printf("[Тест 3] base = 8, числа: 0.125, 0.3, 0.5\n");
@@ -41,5 +41,5 @@ void demonstrate() {
 
     // Тест 4: ошибка — недопустимое основание
     printf("[Тест 4] base = 1, числа: 0.25, 0.5\n");
-    handleTest(haveFiniteRepresentations(&res, 1, 2, 0.25, 0.5), &res);
+    handleTest(haveFiniteRepresentations(&res, 3, 2, 1/3.0, 0.5), &res);
 }

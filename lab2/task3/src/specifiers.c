@@ -99,7 +99,7 @@ int handleMemoryDumpSpecifiers(Specifier spec, va_list args, char * out) {
     switch (spec) {
         DUMP_TYPE(int, MEMORY_DUMP_INT);
         DUMP_TYPE(unsigned int, MEMORY_DUMP_UINT);
-        DUMP_TYPE(int, MEMORY_DUMP_DOUBLE);
+        DUMP_TYPE(double, MEMORY_DUMP_DOUBLE);
         case MEMORY_DUMP_FLOAT: {
             float val = (float)va_arg(args, double);
             return dumpBytes(&val, out, sizeof(float));
