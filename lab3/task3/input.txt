@@ -1,0 +1,15 @@
+1 Johnson   Michael  Edward    15 04 1980 M 3200.50
+2 Smith     Anna     Maria     22 11 1992 W 4100.00
+3 Brown     Robert             03 06 1975 M 2850.75
+4 Davis     Emily    Rose      09 09 1985 W 3900.00
+5 Wilson    James    Arthur    17 12 1968 M 5200.00
+6 Taylor    Olivia   Grace     25 03 2000 W 2100.30
+7 Anderson  William            01 01 1990 M 3100.00
+8 Thomas    Isabella Charlotte 30 07 1998 W 2950.90
+9 Jackson   Daniel             12 05 1970 M 4600.00
+10 White    Sophia   Lily      11 08 1983 W 3800.00
+11 Johnson   Alice   Maria     15 04 2001 W 2500.00
+12 Smith     Robert  John      15 04 1980 M 3600.00
+13 Johnson   Michael Edward    15 04 1980 M 3200.50
+14 Davis     Emily   Rose      09 09 1985 W 3900.00
+15 Taylor    Olivia  Grace     25 03 2000 W 2100.30
