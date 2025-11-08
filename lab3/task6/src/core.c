@@ -2,7 +2,6 @@
 #include "../include/linkedList.h"
 #include <limits.h>
 #include <stdbool.h>
-#include <stdlib.h>
 
 DEFINE_LINKED_LIST(char);
 

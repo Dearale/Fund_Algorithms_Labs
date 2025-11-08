@@ -1,0 +1,7 @@
+int A = 1;
+int B = 2;
+int C = 3;
+int D = 4;
+int E = 5;
+double Z = (pow((((A + B) * C) - D), 2) + E * (A + B + C + D + E) - (pow(A, 2)) + (pow(B, 3)) - (pow(C, 2)) + (pow(D, 3))) / (B + A);
+printf("Z: %lf\n", Z);
