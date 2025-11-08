@@ -4,23 +4,68 @@
 #include <limits.h>
 
 void demonstrate() {
-    char res[MAX_NUM_LEN + 1];
-    
-    int test_numbers[] = {0, 1, -1, 15, -15, 16, -16,
-         255, -255, 1024, -1024, 12345, -12345, INT_MAX, INT_MIN};
-    int r_values[] = {1, 2, 3, 4, 5};
-    
-    printf("Тесты:\n\n");
-    
-    for (size_t i = 0; i < sizeof(test_numbers) / sizeof(test_numbers[0]); i++) {
-        printf("Число %d:\n", test_numbers[i]);
-        
-        for (size_t j = 0; j < sizeof(r_values) / sizeof(r_values[0]); j++) {
-            convertTo2Base(test_numbers[i], r_values[j], res);
-            printf("  Основание 2^%d (%d): %s\n", 
-                   r_values[j], 1 << r_values[j], res);
-        }
-        printf("\n");
-    }
+     const char *tests[] = {
+        "", 
+        "()", "[]", "{}", "<>",
+        "()[]{}", 
+        "([{}])", 
+        "[({(<()>)}[])]",
+        "(((((((((())))))))))",
 
+        "([)]",
+        "[(])",
+        "(]",
+        "(()",
+        "())",
+        "({[<]})",
+        "<(>)",
+        "{<[()]>",
+        "no closing bracket {",
+        "extra closing ) right here",
+        "mismatch <]>",
+
+        "text (a + b) [c - {d * (e + f)}]",
+        "a(b[c]{d<e>})f",
+        "a(b[c]{d<e>)})f",
+        "function(x[y{z<w>}])",
+        "if ((x[0] < y[1]) && (z > w)) { return; }",
+
+        "no brackets here at all",
+        "12345 +-*/ abc",
+        "привет, мир!",
+
+        "<html><body>([{}])</body></html>",
+        "<div><span></div></span>",
+        "<<nested>><<tags>>",
+        "<<nested><tags>>",
+
+        "print(\"(text)\")",
+        "print('[{<()[]>}]')",
+        "\"string with ) inside\" (true)",
+
+        "(((((((((((((((((((((())))))))))))))))))))))",
+        "(((((((((((((((((((((()))))))))))))))))))))))",
+        "[][][][][][][][][][][][][][][][][][][][]",
+        "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[",
+
+        "{<[(a+b)*(c+d)] + [(x/y)-{z<w>}]} + (p<q>[r{s<t>u}])>",
+
+        "{<[(])>}",
+        "{<([)]>}",
+        "[({(<)>})]",
+        "([{<abc123>}])",
+        "([{<abc123>})]",
+
+        "<", ">", "[", "]", "{", "}", "(", ")",
+        "<><><><><>",
+        "<<<>>>",
+        "<<><>>",
+        NULL
+    };
+
+    puts("Тесты:");
+    for (int i = 0; tests[i]; ++i) {
+        int ok = check_brackets(tests[i]);
+        printf("%2d. %s -> %s\n", i + 1, tests[i], ok ? "OK" : "NO");
+    }
 }

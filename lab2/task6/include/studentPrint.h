@@ -1,5 +1,6 @@
 #ifndef STUDENT_PRINT_H
 #define STUDENT_PRINT_H
+#include "student.h"
 
 void printStudentsWithID(Students *students, unsigned int id);
 

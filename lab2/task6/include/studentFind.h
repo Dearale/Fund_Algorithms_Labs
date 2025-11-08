@@ -1,5 +1,6 @@
 #ifndef STUDENT_FIND_H
 #define STUDENT_FIND_H
+#include "student.h"
 
 int findById(Students *students, unsigned int id, size_t startIndex);
 

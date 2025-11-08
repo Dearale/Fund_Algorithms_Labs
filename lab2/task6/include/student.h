@@ -2,7 +2,6 @@
 #define STUDENT_H
 
 #include <stdio.h>
-#include "student.h"
 #include "statusManager.h"
 #include "utils.h"
 
