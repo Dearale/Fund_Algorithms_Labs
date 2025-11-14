@@ -64,14 +64,22 @@ Status try_parse_print(Vars *vars, ParseData *parse_data) {
 
     if (!parse_char('(', parse_data)) return NO_OPEN_BRACKET_AFTER_PRINT;
 
-    int var_idx = 0;
-    if ((var_idx = parse_var(parse_data)) < 0) return INVALID_VAR_IN_PRINT;
+    skip_spaces(parse_data);
+    char *start_pointer = parse_data->p;
+    int res = parse_expression(vars, parse_data);
+
+    if (parse_data->has_error) return parse_data->status;
+    
+    char *end_pointer = parse_data->p;
+
     if (!parse_char(')', parse_data)) return NO_CLOSE_BRACKET_AFTER_VAR_IN_PRINT;
     if (!parse_char('\0', parse_data)) return UNEXPECTED_CHARACTERS_AFTER_PRINT;
-    if (!vars->initialized[var_idx]) return UNKNOWN_VAR_IN_PRINT;
 
-    sprintf(parse_data->operation_msg, "Print %c", var_idx + 'A');
-    printf("%d\n", vars->vars[var_idx]);
+    char expression_str[MAX_STR_LEN - 6];  // "-6" для учета "Print " и нулевого символа;
+    strncpy(expression_str, start_pointer, end_pointer - start_pointer);
+    expression_str[end_pointer - start_pointer] = '\0';
+    sprintf(parse_data->operation_msg, "Print %s", expression_str);
+    printf("%d\n", res);
 
     return OK;
 }
